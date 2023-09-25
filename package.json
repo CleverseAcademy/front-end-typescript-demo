@@ -1,15 +1,24 @@
 {
   "name": "front-end-typescript-demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Cleverse academy's demo code for typescript language",
+  "main": "dist/basic-type.js",
   "scripts": {
-    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CleverseAcademy/front-end-typescript-demo.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Cleverse Academy",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CleverseAcademy/front-end-typescript-demo/issues"
+  },
+  "homepage": "https://github.com/CleverseAcademy/front-end-typescript-demo#readme",
   "devDependencies": {
     "typescript": "^5.2.2"
   }
