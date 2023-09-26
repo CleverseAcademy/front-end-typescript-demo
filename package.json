@@ -4,6 +4,7 @@
   "description": "Cleverse academy's demo code for typescript language",
   "main": "dist/basic-type.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
