@@ -32,6 +32,8 @@ const mutual: mutualFunc = (arr1, arr2) => {
 const class1 = ['Alice', 'Bob', 'John', 'Jane']
 const class2 = ['John', 'Foobar', 'Barbaz', 'Foobaz', 'Bob']
 
+console.log(mutual(class1, class2))
+
 type gcdFunc = (a: number, b: number) => number
 
 const gcd: gcdFunc = (a, b) => {
@@ -47,6 +49,8 @@ const gcd: gcdFunc = (a, b) => {
   return a
 }
 
+console.log(gcd(15, 20))
+
 type filterLtFunc = (value: number, arr: number[]) => number[]
 
 const filterLt: filterLtFunc = (value, arr) => {
@@ -61,12 +65,14 @@ const filterLt: filterLtFunc = (value, arr) => {
   return result
 }
 
+console.log(filterLt(20, [5, 10, 20, 30, 40]))
+
 type fizzBuzzFunc = (n: number) => number | string
 
 type FizzBuzzText = 'Fizz' | 'Buzz' | 'FizzBuzz'
 type fizzBuzzConcreteFunc = (n: number) => number | FizzBuzzText
 
-const fizzBuzzGenerator: fizzBuzzFunc = (n) => {
+const fizzBuzzGenerator: fizzBuzzConcreteFunc = (n) => {
   if (n % (3 * 5) === 0) {
     return 'FizzBuzz'
   }
@@ -83,10 +89,12 @@ const fizzBuzzGenerator: fizzBuzzFunc = (n) => {
 const fizzBuzz = (n: number) => {
   if (n < 0) return
 
-  for (let i = 0; i < n; i++) {
+  for (let i = 1; i <= n; i++) {
     console.log(fizzBuzzGenerator(i))
   }
 }
+
+fizzBuzz(20)
 
 interface X {
   a: number
