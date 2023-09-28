@@ -19,7 +19,7 @@ const getContents = async () => {
     const academyFirstDate = new Date('2023-05-22T00:00:00.000+07:00')
 
     /**
-     * Approach #0 - Back to basic, use naive for loop
+     * Approach #0 - Back to basics, using a naive for-loop
      */
 
     const filteredResult = []
@@ -28,24 +28,29 @@ const getContents = async () => {
 
       const createdAtDate = new Date(element.createdAt)
       if (
-        // using valueOf method
+        // Using the valueOf() method to compare the two dates as milliseconds
         createdAtDate.valueOf() < academyFirstDate.valueOf() &&
-        // or using + sign
+        // Using the + sign to convert both dates to numbers and then comparing them
         +createdAtDate < +academyFirstDate &&
-        // or just compare two Date
+        // Simply comparing the two dates directly
         createdAtDate < academyFirstDate
       )
         filteredResult.push(element)
+      /**
+       * Note: It is intentional to use the [&&] operator for all expressions above,
+       * as it will all yield a true value, true && true && true == true.
+       * This means that the code will only push the element to filteredResult if all three expressions are true.
+       */
     }
 
     /**
-     * Approach #1: Map each content.createdAt from string to Date first,
+     * Approach #1: Map each piece of content.createdAt from string to Date first,
      * and then filter only content that was created before 22-05-2023
      */
     const mappedToDate = contentList
       // Map from string => Date
       .map((
-        /* Object desctruction, we only need [createdAt] field and left the rest being [others] */ {
+        /* Object desctruction, we only need the [createdAt] field, leaving the rest to [others] */ {
           createdAt,
           ...others
         },
@@ -54,17 +59,17 @@ const getContents = async () => {
         createdAt: new Date(createdAt),
       }))
 
-    // And filter only contents that were created before 22-05-2023
+    // Then filter only the contents that were created before 22-05-2023
     const filteredContentUsingMapped = mappedToDate.filter(
       ({ createdAt }) => createdAt.valueOf() < academyFirstDate.valueOf(),
     )
 
-    // We can also make this work by + as a prefix
+    // We can also make this work by using [+] as a prefix
     const shorterFilteredContentUsingMapped = mappedToDate.filter(
       ({ createdAt }) => +createdAt < +academyFirstDate,
     )
 
-    // Or, even comparing Date without a + sign
+    // Or, even comparing Date without a [+] sign
     const shortestFilteredContentUsingMapped = mappedToDate.filter(
       ({ createdAt }) => createdAt < academyFirstDate,
     )
@@ -77,7 +82,7 @@ const getContents = async () => {
         new Date(content.createdAt).valueOf() < academyFirstDate.valueOf(),
     )
 
-    // just using + sign
+    // just using a [+] sign
     const shorterFilteredContentWithOnlyFilter = contentList.filter(
       (content) => +new Date(content.createdAt) < +academyFirstDate,
     )
@@ -87,7 +92,15 @@ const getContents = async () => {
       (content) => new Date(content.createdAt) < academyFirstDate,
     )
 
+    console.log(JSON.stringify(filteredResult, null, 2))
+
     console.log(
+      // plus sign is equal to Number()
+      +academyFirstDate === Number(academyFirstDate),
+      /**
+       * Print only the length for readability,
+       * but demonstrate that any of the above-mentioned solutions will generate the same outcome.
+       * */
       filteredResult.length,
       filteredContentUsingMapped.length,
       shorterFilteredContentUsingMapped.length,
@@ -96,8 +109,6 @@ const getContents = async () => {
       shorterFilteredContentWithOnlyFilter.length,
       shortestFilteredContentWithOnlyFilter.length,
     )
-
-    console.log(JSON.stringify(filteredResult, null, 2))
   } catch (error) {
     console.error(error)
   }

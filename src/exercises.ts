@@ -14,10 +14,6 @@ const mapRevertSign: mapRevertSignFunc = (arr) => {
 
 console.log(mapRevertSign([2, 4, 6]))
 
-
-
-
-
 type mutualFunc = (arr1: string[], arr2: string[]) => string[]
 
 const mutual: mutualFunc = (arr1, arr2) => {
@@ -35,8 +31,6 @@ const mutual: mutualFunc = (arr1, arr2) => {
 
 const class1 = ['Alice', 'Bob', 'John', 'Jane']
 const class2 = ['John', 'Foobar', 'Barbaz', 'Foobaz', 'Bob']
-
-// mutual(class1, class2)
 
 type gcdFunc = (a: number, b: number) => number
 
@@ -74,20 +68,20 @@ type fizzBuzzConcreteFunc = (n: number) => number | FizzBuzzText
 
 const fizzBuzzGenerator: fizzBuzzFunc = (n) => {
   if (n % (3 * 5) === 0) {
-    return "FizzBuzz";
+    return 'FizzBuzz'
   }
   if (n % 3 === 0) {
-    return "Fizz";
+    return 'Fizz'
   }
   if (n % 5 === 0) {
-    return "Buzz";
+    return 'Buzz'
   }
 
-  return n;
+  return n
 }
 
 const fizzBuzz = (n: number) => {
-  if (n < 0) return;
+  if (n < 0) return
 
   for (let i = 0; i < n; i++) {
     console.log(fizzBuzzGenerator(i))
@@ -104,14 +98,40 @@ interface Y {
   ba: string
 }
 
-interface Zoo extends X, Y{
+interface Zoo extends X, Y {
   g: boolean
 }
 
-const isMember = () => {
-  
+/* type for isMember function, in union style */
+type isMemberFuncUnionType = (
+  q: number | string,
+  arr: number[] | string[],
+) => boolean
+
+const isMemberUnion: isMemberFuncUnionType = (q, arr) => {
+  for (let index = 0; index < arr.length; index++) {
+    const element = arr[index]
+    if (element === q) return true
+  }
+  return false
 }
 
-// const zoo1: Zoo = {
+// Implementation above allow mixed type function call
+isMemberUnion(5, ['A', 'B', 'C', 'D'])
 
-// }
+type isMemberFuncGenericType = <T>(q: T, arr: T[]) => boolean
+
+const isMember: isMemberFuncGenericType = (q, arr) => {
+  for (let index = 0; index < arr.length; index++) {
+    const element = arr[index]
+    if (element === q) return true
+  }
+  return false
+}
+
+// But isMember function won't allow mixed type function call
+// isMember(5, ['A', 'B', 'C', 'D'])
+
+isMember(5, [1, 3, 7, 12])
+isMember<string>('john', ['jane', 'jim', 'john'])
+isMember(true, [false, false])
