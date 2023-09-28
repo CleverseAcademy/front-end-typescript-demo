@@ -1,3 +1,6 @@
+/**
+ * Basic: type casting number => string function
+ */
 function toString1(aNumber: number): string {
   return String(aNumber)
 }
@@ -8,37 +11,47 @@ const toString2 = (aNumber: number): string => {
 
 const toString3 = (aNumber: number): string => String(aNumber)
 
-const sth1 = (aNumber: number) => {
+/**
+ * Mysterious function that transform number parameter to array of number
+ */
+const range = (aNumber: number): number[] => {
   const x = []
   for (let index = 0; index < aNumber; index++) {
     x.push(index)
   }
-  x.push("X")
   return x
 }
 
+/**
+ * map function, like Array.map
+ * to illustrate how to declare a function type as one of arguments
+ */
+type mapCallbackFunction = (
+  value: number,
+  index: number,
+  array: number[],
+) => number
 
-const map = (array: number[], mapFunction: (value: number, index: number, array: number[]) => number): number[] => {
+const map = (array: number[], mapFunction: mapCallbackFunction): number[] => {
   return array.map(mapFunction)
 }
 
-// map([1,2,3], (i) => )
+// map([1,2,3], (i) => i + 1)
 
-// const sth3 = (x: string) => x.length + "30"
+/**
+ * How about function that returning function?
+ */
+type currying = (
+  a: number,
+) => (b: string) => (c: boolean) => (d: { da: number; db: string }) => boolean
 
-type abcddadb = (a: number) => (b: string) => (c: boolean) => (d: {da: number, db: string}) => boolean 
+const foo: currying = (a) => (b) => (c) => (d) => true
 
-const foo : abcddadb = a => b => c => d => true
-
-console.log(sth1(3))
+console.log(range(3))
 
 // Tips: every type in typescript, including function, can be declared as a dedicated type
 
 type summarizeFunction = (text: string, trail: string, len: number) => string
-
-type stringOrNumber = string | number
-
-const stn: stringOrNumber = "giigke"
 
 const ordinarySummarize: summarizeFunction = (text, trail, len) => {
   if (trail.length >= len) return ''
@@ -62,7 +75,15 @@ const ordinarySummarize: summarizeFunction = (text, trail, len) => {
 }
 
 const reduceSummarize: summarizeFunction = (text, trail, len) =>
-  text.split(' ').reduce((acc, item) => (acc.length + item.length + 1 + trail.length > len) ?  acc : [acc, item].join(" "), "") + trail
+  text
+    .split(' ')
+    .reduce(
+      (acc, item) =>
+        acc.length + item.length + 1 + trail.length > len
+          ? acc
+          : [acc, item].join(' '),
+      '',
+    ) + trail
 
 const articleFoo = 'Good morning ladies and gentlemen'
 
