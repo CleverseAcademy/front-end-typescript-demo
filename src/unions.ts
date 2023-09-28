@@ -5,6 +5,19 @@ const isTrue: (value: string | boolean) => boolean = (value) => {
   return value
 }
 
+const isContainFalsyValue = (value: string | number[] | boolean[]): boolean => {
+  if(value instanceof Array) {
+    value.some((i) => {
+      if(typeof i === 'number')
+        return i === 0
+      return !i
+    })
+    // return value.length === 0
+  }
+  return value === ""
+}
+
+
 console.log(isTrue('true'))
 
 console.log(isTrue('false'))

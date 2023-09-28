@@ -22,5 +22,9 @@
   "homepage": "https://github.com/CleverseAcademy/front-end-typescript-demo#readme",
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.5.1"
   }
 }

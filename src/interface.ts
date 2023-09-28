@@ -55,12 +55,12 @@ interface Y {
 
 type Z = X&Y
 
-const z: Z = {
-  a: 1,
-  b: "abcd",
-  c: "rrr",
-  d: 2
-}
+// const z: Z = {
+//   a: 1,
+//   b: "abcd",
+//   c: "rrr",
+//   d: 2
+// }
 
 
 
